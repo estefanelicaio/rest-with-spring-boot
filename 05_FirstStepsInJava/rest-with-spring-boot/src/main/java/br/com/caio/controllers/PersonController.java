@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,30 +22,32 @@ import br.com.caio.services.PersonService;
 public class PersonController {
 	
 	@Autowired
-	private PersonService personService;
+	private PersonService service;
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Person> findAll() {
-		return personService.findAll();
+		return service.findAll();
 	}
 	
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Person findById(@PathVariable String id) {
-		return personService.findById(id);
+	public Person findById(@PathVariable Long id) {
+		return service.findById(id);
 	}
 	
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Person create(@RequestBody Person person) {
-		return personService.create(person);
+		return service.create(person);
 	}
 	
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Person update(@RequestBody Person person) {
-		return personService.update(person);
+		return service.update(person);
 	}
 	
 	@DeleteMapping(value = "/{id}")
-	public void delete(@PathVariable String id) {
-		personService.delete(id);
+	public ResponseEntity<?> delete(@PathVariable Long id) {
+		service.delete(id);
+		
+		return ResponseEntity.noContent().build();
 	}
 }

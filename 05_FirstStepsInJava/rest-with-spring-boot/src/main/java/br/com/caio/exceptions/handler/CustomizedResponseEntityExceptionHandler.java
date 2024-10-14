@@ -11,7 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import br.com.caio.exceptions.ExceptionResponse;
-import br.com.caio.exceptions.UnsupportedMathOperationException;
+import br.com.caio.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
 @RestController
@@ -22,9 +22,9 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 		return new ResponseEntity<>(createExceptionResponse(ex, request), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@ExceptionHandler(UnsupportedMathOperationException.class)
-	public final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(Exception ex, WebRequest request) {
-		return new ResponseEntity<>(createExceptionResponse(ex, request), HttpStatus.BAD_REQUEST);
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public final ResponseEntity<ExceptionResponse> handleNotFoundExceptions(Exception ex, WebRequest request) {
+		return new ResponseEntity<>(createExceptionResponse(ex, request), HttpStatus.NOT_FOUND);
 	}
 	
 	private ExceptionResponse createExceptionResponse(Exception ex, WebRequest request) {
