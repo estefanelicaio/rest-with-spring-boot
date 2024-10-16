@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.caio.data.vo.v1.PersonVO;
+import br.com.caio.data.vo.v2.PersonVOV2;
 import br.com.caio.exceptions.ResourceNotFoundException;
 import br.com.caio.mapper.DozerMapper;
+import br.com.caio.mapper.custom.PersonMapper;
 import br.com.caio.models.Person;
 import br.com.caio.repositories.PersonRepository;
 
@@ -16,6 +18,9 @@ import br.com.caio.repositories.PersonRepository;
 public class PersonService {
 
 	private Logger logger = Logger.getLogger(PersonService.class.getName());
+	
+	@Autowired
+	private PersonMapper mapper;
 	
 	@Autowired
 	private PersonRepository repository;
@@ -42,6 +47,14 @@ public class PersonService {
 		Person person = repository.save(DozerMapper.parseObject(personVo, Person.class));
 		
 		return DozerMapper.parseObject(person, PersonVO.class);
+	}
+	
+	public PersonVOV2 create(PersonVOV2 personVo) {
+		logger.info("create: person.id = " + personVo.getId());
+		
+		Person person = repository.save(DozerMapper.parseObject(personVo, Person.class));
+		
+		return mapper.convertEntityToVo(person);
 	}
 	
 	public PersonVO update(PersonVO personVo) {
