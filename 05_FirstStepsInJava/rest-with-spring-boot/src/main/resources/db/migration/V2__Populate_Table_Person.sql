@@ -1,1 +1,5 @@
-INSERT INTO `person` VALUES (1,'Brasília - DF - Brasil','Caio','Male','Estefaneli'),(4,'Brasília - DF - Brasil','Maria','Female','Silva'),(5,'Rio de Janeiro - RJ - Brasil','Jose','Male','Silva'),(6,'Rio de Janeiro - RJ - Brasil','Arnaldo','Male','Silva'),(7,'Rio de Janeiro - RJ - Brasil','Luis','Male','Silva'),(9,'Rio de Janeiro - RJ - Brasil','Salah','Male','Silva'),(10,'Rio de Janeiro - RJ - Brasil','Ednaldo','Male','Silva');
+INSERT INTO `person` VALUES 
+(1,'Caio','Silva','Male','Brasília - DF - Brasil'),
+(2,'Maria','Silva','Female','Brasília - DF - Brasil'),
+(3,'Jose','Silva','Male','Rio de Janeiro - RJ - Brasil'),
+(4,'Pedro','Silva','Male','Rio de Janeiro - RJ - Brasil');
